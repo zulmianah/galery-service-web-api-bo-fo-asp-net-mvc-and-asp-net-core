@@ -1,0 +1,205 @@
+﻿@{
+    ViewBag.Title = "Category Picture";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<p>Create category of picture.</p>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal">
+    Create
+</button>
+<br />
+<br />
+<div id="change"></div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">View</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+        </tr>
+    </thead>
+    <tbody id="records_table">
+    </tbody>
+</table>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+    function updateCategoryPictures(){
+                $('#records_table').empty();
+                $.ajax({
+                    type: "GET",
+                    url: "@Url.Action("/RestIndex")",
+                    dataType: "json",
+                    success: function (msg) {
+                        $(function() {
+                            $.each(msg, function(i, item) {
+                                var view = $(
+                                    '<button type="button" class="btn btn-warning">' +
+                                    '<a href="/Picture'+
+                                    '?IdCategoryPicture=' + item.ID_CATEGORY_PICTURE +
+                                    '">More</a>'+
+                                    '</button>');
+                                var edit= $('<button type="button" class="btn btn-success" onclick="update('+ item.ID_CATEGORY_PICTURE+',\''+item.NAME_CATEGORY_PICTURE +'\')"  data-key="'+ (item.ID_CATEGORY_PICTURE) +'" data-toggle="modal" data-target="#exampleModal1" >Edit</button>');
+                                var del= $('<button type="button" class="btn btn-danger" onclick="remove(\''+ (item.ID_CATEGORY_PICTURE) +'\')"  data-key="'+ (item.ID_CATEGORY_PICTURE) +'">Delete</button>');
+                                var $tr = $('<tr>').append(
+                                    $('<td>').text(item.ID_CATEGORY_PICTURE),
+                                    $('<td>').text(item.NAME_CATEGORY_PICTURE),
+                                    $('<td>').append(view),
+                                    $('<td>').append(edit),
+                                    $('<td>').append(del),
+                                ).appendTo('#records_table');
+                            });
+                        });
+                    },
+                    error: function (req, status, error) {
+                        alert(msg);
+                    }
+                });
+    }
+    updateCategoryPictures()
+</script>
+
+<script>
+    $('#button1').on('click', function () {
+        $('#openModal').show();
+    });
+</script>
+
+<!-- Modal SAVE -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Create</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="name">Category Picture Name</label>
+                    <input type="text" class="form-control" id="NAME_CATEGORY_PICTURE" placeholder="Enter Name">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="save" type="button" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $("#save").click(function () {
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("/RestCreate")",
+            data: {
+                NAME_CATEGORY_PICTURE: $("#NAME_CATEGORY_PICTURE").val()
+            },
+            dataType: "json",
+            complete: function (data, xhr, textStatus) {
+                updateCategoryPictures()
+                $('#change').empty();
+                $('<div>').append('<div class="alert alert-success alert-dismissible show" role="alert">' +
+                '<strong>'+$("#NAME_CATEGORY_PICTURE").val()+'</strong> created' +
+                '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                '<span aria-hidden="true">&times;</span>' +
+                '</button>' +
+                '</div>').appendTo('#change');
+            }
+        });
+    });
+</script>
+
+
+<script type="text/javascript">
+    function remove(ID_CATEGORY_PICTURE) {
+        if (confirm("Are you sure?")) {
+            $('#change').empty();
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("RestDelete")?id='+ID_CATEGORY_PICTURE,
+                dataType: "json",
+                success: function (msg) {
+                    updateCategoryPictures();
+                        $('<div>').append('<div class="alert alert-warning alert-dismissible show" role="alert">' +
+                        '<strong>'+msg.NAME_CATEGORY_PICTURE+'</strong> deleted' +
+                        '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                        '<span aria-hidden="true">&times;</span>' +
+                        '</button>' +
+                        '</div>').appendTo('#change');
+                },
+                error: function (req, status, error) {
+                    alert(error);
+                }
+            });
+        }
+        return false;
+    }
+    function update(ID_CATEGORY_PICTURE, NAME_CATEGORY_PICTURE) {
+        console.log(ID_CATEGORY_PICTURE)
+        console.log(NAME_CATEGORY_PICTURE)
+        $("#ID_CATEGORY_PICTURE_TO_UPDATE").val(ID_CATEGORY_PICTURE)
+        $("#NAME_CATEGORY_PICTURE_TO_UPDATE").val(NAME_CATEGORY_PICTURE)
+    }
+</script>
+
+
+<!-- Modal UPDATE -->
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel1">Update</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="name">Category Picture Name</label>
+                    <input type="hidden" id="ID_CATEGORY_PICTURE_TO_UPDATE">
+                    <input type="text" class="form-control" id="NAME_CATEGORY_PICTURE_TO_UPDATE" aria-describedby="emailHelp" placeholder="Enter Name">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="update" type="button" class="btn btn-primary">Update</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $("#update").click(function () {
+        var NAME_CATEGORY_PICTURE_TO_UPDATE = $("#NAME_CATEGORY_PICTURE_TO_UPDATE").val()
+        var ID_CATEGORY_PICTURE_TO_UPDATE = $("#ID_CATEGORY_PICTURE_TO_UPDATE").val();
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("RestUpdate")?id='+ID_CATEGORY_PICTURE_TO_UPDATE,
+            data: {
+                ID_CATEGORY_PICTURE: ID_CATEGORY_PICTURE_TO_UPDATE,
+                NAME_CATEGORY_PICTURE: NAME_CATEGORY_PICTURE_TO_UPDATE
+            },
+            dataType: "json",
+            complete: function (data, xhr, textStatus) {
+                updateCategoryPictures()
+                $('#change').empty();
+                $('<div>').append('<div class="alert alert-info alert-dismissible show" role="alert">' +
+                'Updated to ' +'<strong>'+NAME_CATEGORY_PICTURE_TO_UPDATE+'</strong> '+
+                '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                '<span aria-hidden="true">&times;</span>' +
+                '</button>' +
+                '</div>').appendTo('#change');
+            }
+        });
+    });
+</script>

@@ -1,0 +1,202 @@
+﻿@{
+    ViewBag.Title = "Category Picture";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<input id="IdCategoryPicture" type="hidden" value="@ViewBag.IdCategoryPicture" />
+
+<div id="NAME_CATEGORY_PICTURE">Category </div>
+<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal">
+    Create
+</button>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Date Publish</th>
+            <th scope="col">Date Uploaded</th>
+            <th scope="col">Price</th>
+
+        </tr>
+    </thead>
+    <tbody id="records_table">
+    </tbody>
+</table>
+<nav aria-label="Page navigation example">
+    <ul id="numbers" class="pagination">
+        <li id="previousPage" class="page-item"></li>
+        <li id="nextPage" class="page-item"></li>
+    </ul>
+</nav>
+<!-- Modal SAVE -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form enctype="multipart/form-data">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Create</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">CATEGORY PICTURE</label>
+                        <select class="form-control" id="ID_CATEGORY_PICTURE">
+                            <option value="65">65</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">NAME</label>
+                        <input type="text" class="form-control" id="NAME_PICTURE" value="NAfdsfddME">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">PICTURE</label>
+                        <input type="file" class="form-control-file" id="PICTURE">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">DATE_PUBLISH_PICTURE</label>
+                        <input type="date" class="form-control" id="DATE_PUBLISH_PICTURE" placeholder="xxx">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">DATE_UPLOAD_PICTURE</label>
+                        <input type="date" class="form-control" id="DATE_UPLOAD_PICTURE" placeholder="xxx">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">PRICE_PICTURE</label>
+                        <input type="number" class="form-control" id="PRICE_PICTURE" value="432432">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="save" type="button" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+    function CategoryPicture(){
+        $('#records_table').empty();
+        $.ajax({
+            type: "GET",
+            // https://localhost:44323/Picture/RestIndex?idPicture=65
+            url: "@Url.Action("/RestIndex")",
+            data: {
+                idPicture : @ViewBag.IdCategoryPicture
+            },
+            dataType: "json",
+            success: function (msg) {
+                $("#NAME_CATEGORY_PICTURE").append(msg.NAME_CATEGORY_PICTURE);
+            },
+            error: function (req, status, error) {
+                alert(msg);
+            }
+        });
+    }
+    CategoryPicture()
+</script>
+<script type="text/javascript">
+    function updatePictures(pageNumberRest, pageSizeRest){
+                $('#records_table').empty();
+                $.ajax({
+                    type: "GET",
+                    // https://localhost:44323/Picture/RestPaginate?IdCategoryPicture=65&pageNumber=1&pageSize=2
+                    url: "@Url.Action("/RestPaginate")",
+                    data: {
+                        IdCategoryPicture: @ViewBag.IdCategoryPicture,
+                        pageNumber: pageNumberRest,
+                        pageSize: pageSizeRest
+                    },
+                    dataType: "json",
+                    success: function (msg) {
+                        $('#previousPage').empty();
+                        $("#numbers").empty();
+                        if (msg.previousPage == "Yes") {
+                            $("#numbers").append(
+                                '<li class="page-item"><button type="button" class="btn btn-secondary" onclick="updatePictures(' +
+                                (msg.currentPage - 1) +
+                                ',' +
+                                msg.pageSize +
+                                ')">Previous</button></li>'
+                            );
+                        }
+                        for (var i = 0; i < msg.totalPages; i++) {
+                            $("#numbers").append(
+                                '<li class="page-item"><button type="button" class="btn btn-secondary" onclick="updatePictures(' +
+                                (i + 1) +
+                                ',' +
+                                msg.pageSize +
+                                ')"> ' +
+                                (i + 1) +
+                                '</button></li>'
+                            );
+                        }
+                        if (msg.nextPage == "Yes") {
+                            $("#numbers").append(
+                                '<li class="page-item"><button type="button" class="btn btn-secondary" onclick="updatePictures(' +
+                                (msg.currentPage + 1) +
+                                ',' +
+                                msg.pageSize +
+                                ')">Next</button></li>'
+                            );
+                        }
+                        $(function() {
+                            $.each(msg.items, function (i, item) {
+                                var $tr = $('<tr>').append(
+                                    $('<td>').text(item.ID_PICTURE),
+                                    $('<td>').text(item.NAME_PICTURE),
+                                    $('<td>').text(item.DATE_PUBLISH_PICTURE),
+                                    $('<td>').text(item.DATE_UPLOAD_PICTURE),
+                                    $('<td>').text(item.PRICE_PICTURE),
+                                    $('<td>').append('<div class="text-center"><img class="img-thumbnail" src="https://localhost:44388/Content/Images/'+item.ID_PICTURE+'.jpg" style="width: 100px; height: 100px;"></div>')
+                                ).appendTo('#records_table');
+                            });
+                        });
+                    },
+                    error: function (req, status, error) {
+                        alert(msg);
+                    }
+                });
+    }
+    updatePictures(1, 5)
+</script>
+
+
+<script>
+    $(function () {
+        $('#save').click(function () {
+            //var formData = new FormData($('form')[0]);
+            var formData = new FormData();
+
+            formData.append("ID_CATEGORY_PICTURE", $("#ID_CATEGORY_PICTURE").val());
+            formData.append("NAME_PICTURE", $("#NAME_PICTURE").val());
+            formData.append("DATE_PUBLISH_PICTURE", $("#DATE_PUBLISH_PICTURE").val());
+            formData.append("DATE_UPLOAD_PICTURE", $("#DATE_UPLOAD_PICTURE").val());
+            formData.append("PRICE_PICTURE", $("#PRICE_PICTURE").val());
+
+            var file = document.getElementById("PICTURE").files[0];
+            formData.append("PICTURE", file);
+
+            $.ajax({
+                url: "@Url.Action("/RestCreate")",
+                type: 'POST',
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                complete: function (data, xhr, textStatus) {
+                    alert("New Picture added successfullly!")
+                }
+            });
+        });
+    });
+</script>

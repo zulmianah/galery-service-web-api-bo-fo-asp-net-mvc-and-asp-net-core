@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="galeryModelStoreContainer" CdmEntityContainer="galery">
+    <EntitySetMapping Name="CATEGORY_PICTURE">
+      <EntityTypeMapping TypeName="galeryModel.CATEGORY_PICTURE">
+        <MappingFragment StoreEntitySet="CATEGORY_PICTURE">
+          <ScalarProperty Name="NAME_CATEGORY_PICTURE" ColumnName="NAME_CATEGORY_PICTURE" />
+          <ScalarProperty Name="ID_CATEGORY_PICTURE" ColumnName="ID_CATEGORY_PICTURE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PICTUREs">
+      <EntityTypeMapping TypeName="galeryModel.PICTURE">
+        <MappingFragment StoreEntitySet="PICTURE">
+          <ScalarProperty Name="PRICE_PICTURE" ColumnName="PRICE_PICTURE" />
+          <ScalarProperty Name="DATE_UPLOAD_PICTURE" ColumnName="DATE_UPLOAD_PICTURE" />
+          <ScalarProperty Name="DATE_PUBLISH_PICTURE" ColumnName="DATE_PUBLISH_PICTURE" />
+          <ScalarProperty Name="NAME_PICTURE" ColumnName="NAME_PICTURE" />
+          <ScalarProperty Name="ID_CATEGORY_PICTURE" ColumnName="ID_CATEGORY_PICTURE" />
+          <ScalarProperty Name="ID_PICTURE" ColumnName="ID_PICTURE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

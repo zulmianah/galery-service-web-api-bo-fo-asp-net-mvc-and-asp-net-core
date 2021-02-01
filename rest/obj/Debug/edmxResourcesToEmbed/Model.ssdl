@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="galeryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CATEGORY_PICTURE">
+    <Key>
+      <PropertyRef Name="ID_CATEGORY_PICTURE" />
+    </Key>
+    <Property Name="ID_CATEGORY_PICTURE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NAME_CATEGORY_PICTURE" Type="text" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PICTURE">
+    <Key>
+      <PropertyRef Name="ID_PICTURE" />
+    </Key>
+    <Property Name="ID_PICTURE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_CATEGORY_PICTURE" Type="int" Nullable="false" />
+    <Property Name="NAME_PICTURE" Type="text" Nullable="false" />
+    <Property Name="DATE_PUBLISH_PICTURE" Type="datetime" Nullable="false" />
+    <Property Name="DATE_UPLOAD_PICTURE" Type="datetime" Nullable="false" />
+    <Property Name="PRICE_PICTURE" Type="money" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="galeryModelStoreContainer">
+    <EntitySet Name="CATEGORY_PICTURE" EntityType="Self.CATEGORY_PICTURE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PICTURE" EntityType="Self.PICTURE" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>
