@@ -3,6 +3,8 @@
 ## web api service
 <img alt="zulmianah" src="/screenshots/Screenshot%20(234).png" width="50%">
 image (01) : https://localhost:44388/Help
+## back office - asp net mvc
+jquery is used to consume the api
 <img alt="zulmianah" src="/screenshots/Screenshot%20(235).png" width="50%">
 image (02) : xxx
 <img alt="zulmianah" src="/screenshots/Screenshot%20(236).png" width="50%">
