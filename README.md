@@ -21,3 +21,5 @@ prove loged in
 <img alt="zulmianah" src="/screenshots/Screenshot%20(246).png" width="50%"/>
 <img alt="zulmianah" src="/screenshots/Screenshot%20(247).png" width="50%"/>
 <img alt="zulmianah" src="/screenshots/Screenshot%20(248).png" width="50%"/>
+![zulmianah](/screenshots/Screenshot%20(285).png)
+![zulmianah](/screenshots/Screenshot%20(286).png)
