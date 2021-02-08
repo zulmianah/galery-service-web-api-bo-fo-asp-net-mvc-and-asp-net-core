@@ -3,6 +3,10 @@
   <EntityContainer Name="galery" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="CATEGORY_PICTURE" EntityType="galeryModel.CATEGORY_PICTURE" />
     <EntitySet Name="PICTUREs" EntityType="galeryModel.PICTURE" />
+    <EntitySet Name="MYLOGINs" EntityType="galeryModel.MYLOGIN" />
+    <EntitySet Name="CATEGORies" EntityType="galeryModel.CATEGORY" />
+    <EntitySet Name="CATEGORY_PERIODE" EntityType="galeryModel.CATEGORY_PERIODE" />
+    <EntitySet Name="PICTURE_SEARCH" EntityType="galeryModel.PICTURE_SEARCH" />
   </EntityContainer>
   <EntityType Name="CATEGORY_PICTURE">
     <Key>
@@ -21,5 +25,44 @@
     <Property Name="DATE_PUBLISH_PICTURE" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="DATE_UPLOAD_PICTURE" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="PRICE_PICTURE" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+  </EntityType>
+  <EntityType Name="MYLOGIN">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PASSWORD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="CATEGORY">
+    <Key>
+      <PropertyRef Name="ID_CATEGORY_PICTURE" />
+    </Key>
+    <Property Name="ID_CATEGORY_PICTURE" Type="Int32" Nullable="false" />
+    <Property Name="NAME_CATEGORY_PICTURE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="MYCOUNT" Type="Int32" />
+  </EntityType>
+  <EntityType Name="CATEGORY_PERIODE">
+    <Key>
+      <PropertyRef Name="ID_CATEGORY_PICTURE" />
+    </Key>
+    <Property Name="ID_CATEGORY_PICTURE" Type="Int32" Nullable="false" />
+    <Property Name="NAME_CATEGORY_PICTURE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="DATE_UPLOAD_PICTURE" Type="DateTime" Precision="0" />
+    <Property Name="MYCOUNT" Type="Int32" />
+  </EntityType>
+  <EntityType Name="PICTURE_SEARCH">
+    <Key>
+      <PropertyRef Name="ID_CATEGORY_PICTURE" />
+      <PropertyRef Name="PRICE_PICTURE" />
+      <PropertyRef Name="ID_PICTURE" />
+    </Key>
+    <Property Name="DATE_UPLOAD_PICTURE" Type="DateTime" Precision="0" />
+    <Property Name="DATE_PUBLISH_PICTURE" Type="DateTime" Precision="0" />
+    <Property Name="NAME_CATEGORY_PICTURE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ID_CATEGORY_PICTURE" Type="Int32" Nullable="false" />
+    <Property Name="NAME_PICTURE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="PRICE_PICTURE" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="ID_PICTURE" Type="Int32" Nullable="false" />
   </EntityType>
 </Schema>

@@ -27,5 +27,9 @@ namespace rest
     
         public virtual DbSet<CATEGORY_PICTURE> CATEGORY_PICTURE { get; set; }
         public virtual DbSet<PICTURE> PICTUREs { get; set; }
+        public virtual DbSet<MYLOGIN> MYLOGINs { get; set; }
+        public virtual DbSet<CATEGORY> CATEGORies { get; set; }
+        public virtual DbSet<CATEGORY_PERIODE> CATEGORY_PERIODE { get; set; }
+        public virtual DbSet<PICTURE_SEARCH> PICTURE_SEARCH { get; set; }
     }
 }

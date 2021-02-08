@@ -1,0 +1,87 @@
+{
+  "format": 1,
+  "restore": {
+    "E:\\Documents\\m2\\naina\\galery-service-web-api-bo-fo-asp-net-mvc-and-asp-net-core\\fo\\fo.csproj": {}
+  },
+  "projects": {
+    "E:\\Documents\\m2\\naina\\galery-service-web-api-bo-fo-asp-net-mvc-and-asp-net-core\\fo\\fo.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\Documents\\m2\\naina\\galery-service-web-api-bo-fo-asp-net-mvc-and-asp-net-core\\fo\\fo.csproj",
+        "projectName": "fo",
+        "projectPath": "E:\\Documents\\m2\\naina\\galery-service-web-api-bo-fo-asp-net-mvc-and-asp-net-core\\fo\\fo.csproj",
+        "packagesPath": "C:\\Users\\kom\\.nuget\\packages\\",
+        "outputPath": "E:\\Documents\\m2\\naina\\galery-service-web-api-bo-fo-asp-net-mvc-and-asp-net-core\\fo\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\kom\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "E:\\Documents\\m2\\naina\\galery-service-web-api-bo-fo-asp-net-mvc-and-asp-net-core\\rest\\rest.csproj": {
+                "projectPath": "E:\\Documents\\m2\\naina\\galery-service-web-api-bo-fo-asp-net-mvc-and-asp-net-core\\rest\\rest.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[11.0.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "E:\\Documents\\m2\\naina\\galery-service-web-api-bo-fo-asp-net-mvc-and-asp-net-core\\rest\\rest.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\Documents\\m2\\naina\\galery-service-web-api-bo-fo-asp-net-mvc-and-asp-net-core\\rest\\rest.csproj",
+        "projectName": "rest",
+        "projectPath": "E:\\Documents\\m2\\naina\\galery-service-web-api-bo-fo-asp-net-mvc-and-asp-net-core\\rest\\rest.csproj"
+      },
+      "frameworks": {
+        "net472": {}
+      }
+    }
+  }
+}

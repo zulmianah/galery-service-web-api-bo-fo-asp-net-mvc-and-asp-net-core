@@ -1,0 +1,123 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Search for your picture.</p>
+    <div class="input-group">
+        <input onkeyup="search()" type="text" class="form-control" placeholder="name" id="NAME_PICTURE">
+        <input onkeyup="search()" type="text" class="form-control" placeholder="category" id="NAME_CATEGORY_PICTURE">
+        <input onkeyup="search()" type="number" class="form-control" placeholder="price min" id="MIN">
+        <input onkeyup="search()" type="number" class="form-control" placeholder="price max" id="MAX">
+    </div>
+    <br />
+    <div class="input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="">Publish</span>
+        </div>
+        <input onchange="search()" type="date" class="form-control" id="MINDATEPUB">
+        <input onchange="search()" type="date" class="form-control" id="MAXDATEPUB">
+    </div>
+    <br />
+    <div class="input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="">Upload</span>
+        </div>
+        <input onchange="search()" type="date" class="form-control" id="MINDATEUP">
+        <input onchange="search()" type="date" class="form-control" id="MAXDATEUP">
+    </div>
+    <br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Category</th>
+                <th scope="col">Date Publish</th>
+                <th scope="col">Date Uploaded</th>
+                <th scope="col">Price</th>
+                <th scope="col">Picture</th>
+
+            </tr>
+        </thead>
+        <tbody id="records_table">
+        </tbody>
+    </table>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+    function CategoryPicture(){
+        $('#records_table').empty();
+        $.ajax({
+            type: "GET",
+            // https://localhost:44321/Home/IndexRest
+            url: "@Url.Action("IndexRest")",
+            dataType: "json",
+            success: function (msg) {
+                $.each(msg, function (i, item) {
+                    var $tr = $('<tr>').append(
+                        $('<td>').text(item.iD_PICTURE),
+                        $('<td>').text(item.namE_PICTURE),
+                        $('<td>').text(item.namE_CATEGORY_PICTURE),
+                        $('<td>').text(item.datE_PUBLISH_PICTURE),
+                        $('<td>').text(item.datE_UPLOAD_PICTURE),
+                        $('<td>').text(item.pricE_PICTURE),
+                        $('<td>').append('<div class="text-center"><img class="img-thumbnail" src="https://localhost:44388/Content/Images/'+item.iD_PICTURE+'.jpg" style="width: 100px; height: 100px;"></div>')
+                    ).appendTo('#records_table');
+                });
+            },
+            error: function (req, status, error) {
+                alert(msg);
+            }
+        });
+    }
+    CategoryPicture()
+</script>
+<script type="text/javascript">
+    function search() {
+        var MAXDATEPUB = $('#MAXDATEPUB').val();
+        var MAXDATEUP = $('#MAXDATEUP').val();
+        if ($('#MAXDATEPUB').val() == "") {
+            MAXDATEPUB="9999-12-03"
+        }
+        if ($('#MAXDATEUP').val() == "") {
+            MAXDATEUP="9999-12-03"
+        }
+        $('#records_table').empty();
+        $.ajax({
+            type: "GET",
+            // https://localhost:44321/Home/IndexRest
+            url: "@Url.Action("SearchRest")?NAME_PICTURE="
+                + $('#NAME_PICTURE').val()
+                + "&NAME_CATEGORY_PICTURE="
+                + $('#NAME_CATEGORY_PICTURE').val()
+                + "&MIN="
+                + $('#MIN').val()
+                + "&MAX="
+                + $('#MAX').val()
+                + "&MINDATEPUB="
+                + $('#MINDATEPUB').val()
+                + "&MAXDATEPUB="
+                + MAXDATEPUB
+                + "&MINDATEUP="
+                + $('#MINDATEUP').val()
+                + "&MAXDATEUP="
+                + MAXDATEUP,
+            dataType: "json",
+            complete: function (data, xhr, textStatus) {
+                $.each(data.responseJSON, function (i, item) {
+                    var $tr = $('<tr>').append(
+                        $('<td>').text(item.iD_PICTURE),
+                        $('<td>').text(item.namE_PICTURE),
+                        $('<td>').text(item.namE_CATEGORY_PICTURE),
+                        $('<td>').text(item.datE_PUBLISH_PICTURE),
+                        $('<td>').text(item.datE_UPLOAD_PICTURE),
+                        $('<td>').text(item.pricE_PICTURE),
+                        $('<td>').append('<div class="text-center"><img class="img-thumbnail" src="https://localhost:44388/Content/Images/'+item.iD_PICTURE+'.jpg" style="width: 100px; height: 100px;"></div>')
+                    ).appendTo('#records_table');
+                });
+            }
+        });
+    }
+</script>

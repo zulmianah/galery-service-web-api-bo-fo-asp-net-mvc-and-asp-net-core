@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Web;
@@ -155,6 +156,48 @@ namespace bo.Controllers
                     }
                 }
             }
+        }
+
+        [HttpGet]
+        public async Task<FileResult> Export()
+        {
+            List<PICTURE> items = null;
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseurl);
+                HttpResponseMessage response = await client.GetAsync("Picture");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var EmpResponse = response.Content.ReadAsStringAsync().Result;
+                    items = JsonConvert.DeserializeObject<List<PICTURE>>(EmpResponse);
+                }
+            }
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append("ID,");
+            sb.Append("CATEGORY,");
+            sb.Append("NAME,");
+            sb.Append("PUBLISHED,");
+            sb.Append("UPLOADED,");
+            sb.Append("PRICE,");
+            sb.Append("\r\n");
+            for (int i = 0; i < items.Count; i++)
+            {
+                PICTURE item = items[i];
+                sb.Append(item.ID_PICTURE + ",");
+                sb.Append(item.ID_CATEGORY_PICTURE + ",");
+                sb.Append(item.NAME_PICTURE + ",");
+                sb.Append(item.DATE_PUBLISH_PICTURE.ToString() + ",");
+                sb.Append(item.DATE_UPLOAD_PICTURE.ToString() + ",");
+                sb.Append(item.PRICE_PICTURE + ",");
+
+                //Append new line character.
+                sb.Append("\r\n");
+
+            }
+
+            return File(Encoding.UTF8.GetBytes(sb.ToString()), "text/csv", "Grid.csv");
         }
     }
 }

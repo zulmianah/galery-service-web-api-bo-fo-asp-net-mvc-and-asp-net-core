@@ -22,6 +22,14 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("About", "About", "House")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "House")</li>
+                    @if (Session["login"] == null)
+                    {
+                        <li>@Html.ActionLink("Login", "Login", "House")</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Logout", "Logout", "House")</li>
+                    }
                 </ul>
             </div>
         </div>

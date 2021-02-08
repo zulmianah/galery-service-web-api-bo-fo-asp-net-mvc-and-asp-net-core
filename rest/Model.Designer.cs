@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'E:\Documents\m2\naina\asp\api\rest\Model.edmx'. 
+﻿// T4 code generation is enabled for model 'E:\Documents\m2\naina\galery-service-web-api-bo-fo-asp-net-mvc-and-asp-net-core\rest\Model.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

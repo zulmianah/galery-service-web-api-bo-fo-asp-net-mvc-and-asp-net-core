@@ -4,9 +4,13 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2f4ff5da86cc4fe8a7c189635141f331" Name="Diagram1">
+      <Diagram DiagramId="2f4ff5da86cc4fe8a7c189635141f331" Name="Diagram1" ZoomLevel="10">
         <EntityTypeShape EntityType="galeryModel.CATEGORY_PICTURE" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="galeryModel.PICTURE" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="galeryModel.MYLOGIN" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="galeryModel.CATEGORY" Width="1.5" PointX="3.375" PointY="3.75" />
+        <EntityTypeShape EntityType="galeryModel.CATEGORY_PERIODE" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="galeryModel.PICTURE_SEARCH" Width="1.5" PointX="5.375" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

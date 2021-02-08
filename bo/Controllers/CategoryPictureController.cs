@@ -22,7 +22,14 @@ namespace bo.Controllers
         // GET: CategoryPicture
         public ActionResult Index()
         {
-            return View();
+            if (Session["login"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("LoginFirst", "House");
+            }
         }
 
         // GET: CategoryPicture/RestIndex

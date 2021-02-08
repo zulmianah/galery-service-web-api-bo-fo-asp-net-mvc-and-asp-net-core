@@ -21,5 +21,46 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="MYLOGINs">
+      <EntityTypeMapping TypeName="galeryModel.MYLOGIN">
+        <MappingFragment StoreEntitySet="MYLOGIN">
+          <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CATEGORies">
+      <EntityTypeMapping TypeName="galeryModel.CATEGORY">
+        <MappingFragment StoreEntitySet="CATEGORY">
+          <ScalarProperty Name="MYCOUNT" ColumnName="MYCOUNT" />
+          <ScalarProperty Name="NAME_CATEGORY_PICTURE" ColumnName="NAME_CATEGORY_PICTURE" />
+          <ScalarProperty Name="ID_CATEGORY_PICTURE" ColumnName="ID_CATEGORY_PICTURE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CATEGORY_PERIODE">
+      <EntityTypeMapping TypeName="galeryModel.CATEGORY_PERIODE">
+        <MappingFragment StoreEntitySet="CATEGORY_PERIODE">
+          <ScalarProperty Name="MYCOUNT" ColumnName="MYCOUNT" />
+          <ScalarProperty Name="DATE_UPLOAD_PICTURE" ColumnName="DATE_UPLOAD_PICTURE" />
+          <ScalarProperty Name="NAME_CATEGORY_PICTURE" ColumnName="NAME_CATEGORY_PICTURE" />
+          <ScalarProperty Name="ID_CATEGORY_PICTURE" ColumnName="ID_CATEGORY_PICTURE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PICTURE_SEARCH">
+      <EntityTypeMapping TypeName="galeryModel.PICTURE_SEARCH">
+        <MappingFragment StoreEntitySet="PICTURE_SEARCH">
+          <ScalarProperty Name="ID_PICTURE" ColumnName="ID_PICTURE" />
+          <ScalarProperty Name="PRICE_PICTURE" ColumnName="PRICE_PICTURE" />
+          <ScalarProperty Name="NAME_PICTURE" ColumnName="NAME_PICTURE" />
+          <ScalarProperty Name="ID_CATEGORY_PICTURE" ColumnName="ID_CATEGORY_PICTURE" />
+          <ScalarProperty Name="NAME_CATEGORY_PICTURE" ColumnName="NAME_CATEGORY_PICTURE" />
+          <ScalarProperty Name="DATE_PUBLISH_PICTURE" ColumnName="DATE_PUBLISH_PICTURE" />
+          <ScalarProperty Name="DATE_UPLOAD_PICTURE" ColumnName="DATE_UPLOAD_PICTURE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

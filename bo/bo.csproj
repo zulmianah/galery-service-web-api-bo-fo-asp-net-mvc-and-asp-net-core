@@ -208,6 +208,10 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Views\Picture\Index.cshtml" />
+    <Content Include="Views\House\Login.cshtml" />
+    <Content Include="Views\House\Register.cshtml" />
+    <Content Include="Views\House\LoginFirst.cshtml" />
+    <Content Include="Views\House\Dashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

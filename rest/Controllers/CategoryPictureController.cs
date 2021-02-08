@@ -12,14 +12,45 @@ using rest;
 
 namespace rest.Controllers
 {
+    public class Test
+    {
+        public string Name { get; set; }
+        public int Count { get; set; }
+    }
+    public class CategoryPeriode
+    {
+        public DateTime MyDate { get; set; }
+        public string Name { get; set; }
+        public int Count { get; set; }
+    }
     public class CategoryPictureController : ApiController
     {
-        private galery db = new galery();
+        private readonly galery db = new galery();
 
         // GET: api/CategoryPicture
         public IQueryable<CATEGORY_PICTURE> GetCATEGORY_PICTURE()
         {
             return db.CATEGORY_PICTURE;
+        }
+        [System.Web.Http.Route("api/CategoryPicture/test")]
+        [HttpGet]
+        public IQueryable<Test> Test()
+        {
+            return db.CATEGORies
+                .Select(e => new Test { Name = e.NAME_CATEGORY_PICTURE, Count = (int)e.MYCOUNT });
+        }
+        [System.Web.Http.Route("api/CategoryPicture/test2")]
+        [HttpGet]
+        public IQueryable<CategoryPeriode> Test2()
+        {
+            return db.CATEGORY_PERIODE
+            .Select(e => new CategoryPeriode
+            {
+                MyDate = (DateTime)e.DATE_UPLOAD_PICTURE,
+                Name = e.NAME_CATEGORY_PICTURE,
+                Count = (int)e.MYCOUNT
+            });
+            return null;
         }
 
         // GET: api/CategoryPicture/5

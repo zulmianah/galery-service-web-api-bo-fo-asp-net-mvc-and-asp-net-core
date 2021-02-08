@@ -24,10 +24,43 @@ namespace rest.Controllers
         private galery db = new galery();
 
         // GET: api/Picture
-        /*public IQueryable<PICTURE> GetPICTUREs()
+        public IQueryable<PICTURE> GetPICTUREs()
         {
             return db.PICTUREs;
-        }*/
+        }
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.Route("api/Picture/Search")]
+        public IQueryable<PICTURE_SEARCH> Search(
+            string NAME_PICTURE
+            , string NAME_CATEGORY_PICTURE
+            , decimal? MIN
+            , decimal? MAX
+            , DateTime? MINDATEPUB
+            , DateTime? MAXDATEPUB
+            , DateTime? MINDATEUP
+            , DateTime? MAXDATEUP
+            )
+        {
+            return db.PICTURE_SEARCH.Where(
+                e =>
+                (NAME_PICTURE == null || e.NAME_PICTURE.Contains(NAME_PICTURE)) &&
+
+                (NAME_CATEGORY_PICTURE == null || e.NAME_CATEGORY_PICTURE.Contains(NAME_CATEGORY_PICTURE)) &&
+
+                (((MIN.Equals(null) && MAX.Equals(null)) || (e.PRICE_PICTURE >= MIN && e.PRICE_PICTURE <= MAX)) ||
+                ((!MIN.Equals(null) && MAX.Equals(null)) || (e.PRICE_PICTURE >= MIN)) ||
+                ((MIN.Equals(null) && !MAX.Equals(null)) || (e.PRICE_PICTURE <= MAX))) &&
+
+                (((MINDATEPUB.Equals(null) && MAXDATEPUB.Equals(null)) || (e.DATE_PUBLISH_PICTURE >= MINDATEPUB && e.DATE_PUBLISH_PICTURE <= MAXDATEPUB)) ||
+                ((!MINDATEPUB.Equals(null) && MAXDATEPUB.Equals(null)) || (e.DATE_PUBLISH_PICTURE >= MINDATEPUB)) ||
+                ((MINDATEPUB.Equals(null) && !MAXDATEPUB.Equals(null)) || (e.DATE_PUBLISH_PICTURE <= MAXDATEPUB))) &&
+
+                (((MINDATEUP.Equals(null) && MAXDATEUP.Equals(null)) || (e.DATE_UPLOAD_PICTURE >= MINDATEUP && e.DATE_UPLOAD_PICTURE <= MAXDATEUP)) ||
+                ((!MINDATEUP.Equals(null) && MAXDATEUP.Equals(null)) || (e.DATE_UPLOAD_PICTURE >= MINDATEUP)) ||
+                ((MINDATEUP.Equals(null) && !MAXDATEUP.Equals(null)) || (e.DATE_UPLOAD_PICTURE <= MAXDATEUP)))
+
+                );
+        }
 
         // GET: api/Picture/5
         [ResponseType(typeof(PICTURE))]

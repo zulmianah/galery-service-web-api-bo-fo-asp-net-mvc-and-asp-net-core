@@ -12,6 +12,14 @@
           <Property Name="ID_CATEGORY_PICTURE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NAME_CATEGORY_PICTURE" Type="text" Nullable="false" />
         </EntityType>
+        <EntityType Name="MYLOGIN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EMAIL" Type="varchar" MaxLength="50" />
+          <Property Name="PASSWORD" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="PICTURE">
           <Key>
             <PropertyRef Name="ID_PICTURE" />
@@ -23,9 +31,73 @@
           <Property Name="DATE_UPLOAD_PICTURE" Type="datetime" Nullable="false" />
           <Property Name="PRICE_PICTURE" Type="money" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'galery.dbo.CATEGORY' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CATEGORY">
+          <Key>
+            <PropertyRef Name="ID_CATEGORY_PICTURE" />
+          </Key>
+          <Property Name="ID_CATEGORY_PICTURE" Type="int" Nullable="false" />
+          <Property Name="NAME_CATEGORY_PICTURE" Type="nvarchar" MaxLength="100" />
+          <Property Name="MYCOUNT" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'galery.dbo.CATEGORY_PERIODE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CATEGORY_PERIODE">
+          <Key>
+            <PropertyRef Name="ID_CATEGORY_PICTURE" />
+          </Key>
+          <Property Name="ID_CATEGORY_PICTURE" Type="int" Nullable="false" />
+          <Property Name="NAME_CATEGORY_PICTURE" Type="nvarchar" MaxLength="100" />
+          <Property Name="DATE_UPLOAD_PICTURE" Type="date" />
+          <Property Name="MYCOUNT" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'galery.dbo.PICTURE_SEARCH' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="PICTURE_SEARCH">
+          <Key>
+            <PropertyRef Name="ID_CATEGORY_PICTURE" />
+            <PropertyRef Name="PRICE_PICTURE" />
+            <PropertyRef Name="ID_PICTURE" />
+          </Key>
+          <Property Name="DATE_UPLOAD_PICTURE" Type="date" />
+          <Property Name="DATE_PUBLISH_PICTURE" Type="date" />
+          <Property Name="NAME_CATEGORY_PICTURE" Type="nvarchar" MaxLength="100" />
+          <Property Name="ID_CATEGORY_PICTURE" Type="int" Nullable="false" />
+          <Property Name="NAME_PICTURE" Type="nvarchar" MaxLength="100" />
+          <Property Name="PRICE_PICTURE" Type="money" Nullable="false" />
+          <Property Name="ID_PICTURE" Type="int" Nullable="false" />
+        </EntityType>
         <EntityContainer Name="galeryModelStoreContainer">
           <EntitySet Name="CATEGORY_PICTURE" EntityType="Self.CATEGORY_PICTURE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MYLOGIN" EntityType="Self.MYLOGIN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PICTURE" EntityType="Self.PICTURE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CATEGORY" EntityType="Self.CATEGORY" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CATEGORY].[ID_CATEGORY_PICTURE] AS [ID_CATEGORY_PICTURE], 
+    [CATEGORY].[NAME_CATEGORY_PICTURE] AS [NAME_CATEGORY_PICTURE], 
+    [CATEGORY].[MYCOUNT] AS [MYCOUNT]
+    FROM [dbo].[CATEGORY] AS [CATEGORY]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="CATEGORY_PERIODE" EntityType="Self.CATEGORY_PERIODE" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CATEGORY_PERIODE].[ID_CATEGORY_PICTURE] AS [ID_CATEGORY_PICTURE], 
+    [CATEGORY_PERIODE].[NAME_CATEGORY_PICTURE] AS [NAME_CATEGORY_PICTURE], 
+    [CATEGORY_PERIODE].[DATE_UPLOAD_PICTURE] AS [DATE_UPLOAD_PICTURE], 
+    [CATEGORY_PERIODE].[MYCOUNT] AS [MYCOUNT]
+    FROM [dbo].[CATEGORY_PERIODE] AS [CATEGORY_PERIODE]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="PICTURE_SEARCH" EntityType="Self.PICTURE_SEARCH" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PICTURE_SEARCH].[DATE_UPLOAD_PICTURE] AS [DATE_UPLOAD_PICTURE], 
+    [PICTURE_SEARCH].[DATE_PUBLISH_PICTURE] AS [DATE_PUBLISH_PICTURE], 
+    [PICTURE_SEARCH].[NAME_CATEGORY_PICTURE] AS [NAME_CATEGORY_PICTURE], 
+    [PICTURE_SEARCH].[ID_CATEGORY_PICTURE] AS [ID_CATEGORY_PICTURE], 
+    [PICTURE_SEARCH].[NAME_PICTURE] AS [NAME_PICTURE], 
+    [PICTURE_SEARCH].[PRICE_PICTURE] AS [PRICE_PICTURE], 
+    [PICTURE_SEARCH].[ID_PICTURE] AS [ID_PICTURE]
+    FROM [dbo].[PICTURE_SEARCH] AS [PICTURE_SEARCH]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -34,6 +106,10 @@
         <EntityContainer Name="galery" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CATEGORY_PICTURE" EntityType="galeryModel.CATEGORY_PICTURE" />
           <EntitySet Name="PICTUREs" EntityType="galeryModel.PICTURE" />
+          <EntitySet Name="MYLOGINs" EntityType="galeryModel.MYLOGIN" />
+          <EntitySet Name="CATEGORies" EntityType="galeryModel.CATEGORY" />
+          <EntitySet Name="CATEGORY_PERIODE" EntityType="galeryModel.CATEGORY_PERIODE" />
+          <EntitySet Name="PICTURE_SEARCH" EntityType="galeryModel.PICTURE_SEARCH" />
         </EntityContainer>
         <EntityType Name="CATEGORY_PICTURE">
           <Key>
@@ -52,6 +128,45 @@
           <Property Name="DATE_PUBLISH_PICTURE" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DATE_UPLOAD_PICTURE" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="PRICE_PICTURE" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+        </EntityType>
+        <EntityType Name="MYLOGIN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PASSWORD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="CATEGORY">
+          <Key>
+            <PropertyRef Name="ID_CATEGORY_PICTURE" />
+          </Key>
+          <Property Name="ID_CATEGORY_PICTURE" Type="Int32" Nullable="false" />
+          <Property Name="NAME_CATEGORY_PICTURE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MYCOUNT" Type="Int32" />
+        </EntityType>
+        <EntityType Name="CATEGORY_PERIODE">
+          <Key>
+            <PropertyRef Name="ID_CATEGORY_PICTURE" />
+          </Key>
+          <Property Name="ID_CATEGORY_PICTURE" Type="Int32" Nullable="false" />
+          <Property Name="NAME_CATEGORY_PICTURE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DATE_UPLOAD_PICTURE" Type="DateTime" Precision="0" />
+          <Property Name="MYCOUNT" Type="Int32" />
+        </EntityType>
+        <EntityType Name="PICTURE_SEARCH">
+          <Key>
+            <PropertyRef Name="ID_CATEGORY_PICTURE" />
+            <PropertyRef Name="PRICE_PICTURE" />
+            <PropertyRef Name="ID_PICTURE" />
+          </Key>
+          <Property Name="DATE_UPLOAD_PICTURE" Type="DateTime" Precision="0" />
+          <Property Name="DATE_PUBLISH_PICTURE" Type="DateTime" Precision="0" />
+          <Property Name="NAME_CATEGORY_PICTURE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ID_CATEGORY_PICTURE" Type="Int32" Nullable="false" />
+          <Property Name="NAME_PICTURE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PRICE_PICTURE" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="ID_PICTURE" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -79,6 +194,47 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="MYLOGINs">
+            <EntityTypeMapping TypeName="galeryModel.MYLOGIN">
+              <MappingFragment StoreEntitySet="MYLOGIN">
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CATEGORies">
+            <EntityTypeMapping TypeName="galeryModel.CATEGORY">
+              <MappingFragment StoreEntitySet="CATEGORY">
+                <ScalarProperty Name="MYCOUNT" ColumnName="MYCOUNT" />
+                <ScalarProperty Name="NAME_CATEGORY_PICTURE" ColumnName="NAME_CATEGORY_PICTURE" />
+                <ScalarProperty Name="ID_CATEGORY_PICTURE" ColumnName="ID_CATEGORY_PICTURE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CATEGORY_PERIODE">
+            <EntityTypeMapping TypeName="galeryModel.CATEGORY_PERIODE">
+              <MappingFragment StoreEntitySet="CATEGORY_PERIODE">
+                <ScalarProperty Name="MYCOUNT" ColumnName="MYCOUNT" />
+                <ScalarProperty Name="DATE_UPLOAD_PICTURE" ColumnName="DATE_UPLOAD_PICTURE" />
+                <ScalarProperty Name="NAME_CATEGORY_PICTURE" ColumnName="NAME_CATEGORY_PICTURE" />
+                <ScalarProperty Name="ID_CATEGORY_PICTURE" ColumnName="ID_CATEGORY_PICTURE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PICTURE_SEARCH">
+            <EntityTypeMapping TypeName="galeryModel.PICTURE_SEARCH">
+              <MappingFragment StoreEntitySet="PICTURE_SEARCH">
+                <ScalarProperty Name="ID_PICTURE" ColumnName="ID_PICTURE" />
+                <ScalarProperty Name="PRICE_PICTURE" ColumnName="PRICE_PICTURE" />
+                <ScalarProperty Name="NAME_PICTURE" ColumnName="NAME_PICTURE" />
+                <ScalarProperty Name="ID_CATEGORY_PICTURE" ColumnName="ID_CATEGORY_PICTURE" />
+                <ScalarProperty Name="NAME_CATEGORY_PICTURE" ColumnName="NAME_CATEGORY_PICTURE" />
+                <ScalarProperty Name="DATE_PUBLISH_PICTURE" ColumnName="DATE_PUBLISH_PICTURE" />
+                <ScalarProperty Name="DATE_UPLOAD_PICTURE" ColumnName="DATE_UPLOAD_PICTURE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -93,8 +249,8 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
-        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
