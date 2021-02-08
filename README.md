@@ -4,11 +4,11 @@
 <img alt="zulmianah" src="/screenshots/Screenshot%20(234).png" width="50%"/>
  image (01) : https://localhost:44388/Help
 ## back office - asp net mvc
-jquery is used to consume the api
+### jquery is used to consume the api
 <img alt="zulmianah" src="/screenshots/Screenshot%20(283).png" width="50%"/>
-login
+### login
 <img alt="zulmianah" src="/screenshots/Screenshot%20(284).png" width="50%"/>
-prove loged in
+### prove loged in
 <img alt="zulmianah" src="/screenshots/Screenshot%20(235).png" width="50%"/>
 <img alt="zulmianah" src="/screenshots/Screenshot%20(236).png" width="50%"/>
 <img alt="zulmianah" src="/screenshots/Screenshot%20(237).png" width="50%"/>
@@ -23,3 +23,6 @@ prove loged in
 <img alt="zulmianah" src="/screenshots/Screenshot%20(248).png" width="50%"/>
 <img alt="zulmianah" src="/screenshots/Screenshot%20(285).png" width="50%"/>
 <img alt="zulmianah" src="/screenshots/Screenshot%20(286).png" width="50%"/>
+## front office - asp net core
+### multi criteria table jquery
+<img alt="zulmianah" src="/screenshots/Screenshot%20(288).png" width="50%"/>
